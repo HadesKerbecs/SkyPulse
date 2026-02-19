@@ -150,4 +150,3 @@ Esse usuário é criado automaticamente caso não exista.
 - A arquitetura foi organizada priorizando **clareza, coesão e integração**.
 
 ---
-

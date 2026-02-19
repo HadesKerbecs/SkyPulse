@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===============================
-   VARIÁVEIS DO SHADCN (OBRIGATÓRIO)
-================================ */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -39,9 +36,6 @@
   }
 }
 
-/* =======================================
-   PATCH PARA REMOVER BORDAS DO RECHARTS
-======================================= */
 .recharts-wrapper {
   border: none !important;
   outline: none !important;

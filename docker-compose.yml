@@ -15,7 +15,7 @@ services:
   weather-producer:
     image: weather-producer
     build:
-      context: .
+      context: ./weather-producer
     depends_on:
       - rabbitmq
     environment:
@@ -33,7 +33,7 @@ services:
 
   go-worker:
     build:
-      context: ../go-worker
+      context: ./go-worker
     depends_on:
       - rabbitmq
     environment:
@@ -56,7 +56,7 @@ services:
 
   backend-api:
     build:
-      context: ../backend-api
+      context: ./backend-api
     volumes:
       - ../backend-api/src:/usr/src/app/src
       - /usr/src/app/node_modules
