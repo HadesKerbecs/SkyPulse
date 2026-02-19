@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
 
 import { LoginPage } from "@/pages/Login";
 import { RegisterPage } from "@/pages/Register";

@@ -30,7 +30,6 @@ export default function PokemonDetail() {
   const page = searchParams.get("page");
 
   const darkBg = "#0d0f18";
-  const lightBg = "#ffffff";
   const borderColor = theme === "dark" ? "#2a2f37" : "#dcdcdc";
   const primaryColor = theme === "dark" ? "#a855f7" : "#0b6e78";
 
