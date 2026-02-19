@@ -85,7 +85,7 @@ func main() {
 func enviarParaAPI(w WeatherMessage) error {
 	client := resty.New()
 
-	url := "http://backend-api:3000/api/weather/logs"
+	url := "https://skypulse-backend-jgq0.onrender.com/api/weather/logs"
 
 	resp, err := client.R().
 		SetHeader("Content-Type", "application/json").
