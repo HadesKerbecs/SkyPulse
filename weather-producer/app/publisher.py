@@ -1,13 +1,13 @@
 import json
+import os
 import pika
 import time
 from .config import RABBIT_HOST, RABBIT_PORT, RABBIT_USER, RABBIT_PASS, RABBIT_QUEUE
 
 class RabbitPublisher:
     def __init__(self):
-        credentials = pika.PlainCredentials(RABBIT_USER, RABBIT_PASS)
-        params = pika.ConnectionParameters(host=RABBIT_HOST, port=RABBIT_PORT, credentials=credentials)
-        self.params = params
+        url = os.getenv("RABBIT_URL")
+        self.params = pika.URLParameters(url)
         self._connect()
 
     def _connect(self):
