@@ -5,10 +5,12 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"net/http"
 
 	"github.com/go-resty/resty/v2"
 	"github.com/rabbitmq/amqp091-go"
 )
+
 
 type WeatherMessage struct {
 	Source                   string   `json:"source"`
@@ -25,14 +27,12 @@ type WeatherMessage struct {
 }
 
 func main() {
-	rabbitHost := getEnv("RABBIT_HOST", "rabbitmq")
-	rabbitUser := getEnv("RABBIT_USER", "guest")
-	rabbitPass := getEnv("RABBIT_PASS", "guest")
+	go startHTTP()
+
+	rabbitURL := getEnv("RABBIT_URL", "")
 	queue := getEnv("RABBIT_QUEUE", "weather_queue")
 
-	connStr := "amqp://" + rabbitUser + ":" + rabbitPass + "@" + rabbitHost + ":5672/"
-
-	conn, err := amqp091.Dial(connStr)
+	conn, err := amqp091.Dial(rabbitURL)
 	if err != nil {
 		log.Fatalf("Erro ao conectar no RabbitMQ: %v", err)
 	}
@@ -111,3 +111,11 @@ func getEnv(key, def string) string {
 	}
 	return val
 }
+
+func startHTTP() {
+    port := getEnv("PORT", "10000")
+    http.ListenAndServe(":"+port, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        w.Write([]byte("OK"))
+    }))
+}
+
