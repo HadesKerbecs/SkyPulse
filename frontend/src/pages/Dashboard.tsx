@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -47,8 +48,8 @@ export function Dashboard() {
     async function load() {
       try {
         const [logsRes, insightsRes] = await Promise.all([
-          fetch("http://localhost:3000/api/weather/logs"),
-          fetch("http://localhost:3000/api/weather/insights"),
+          fetch(`${API_URL}/api/weather/logs`),
+          fetch(`${API_URL}/api/weather/insights`),
         ]);
 
         setLogs(await logsRes.json());
@@ -90,7 +91,7 @@ export function Dashboard() {
         <div className="flex flex-wrap gap-3">
           <Button
             className="px-6 py-3 text-lg flex items-center gap-2"
-            onClick={() => window.open("http://localhost:3000/api/weather/export.csv")}
+            onClick={() => window.open(`${API_URL}/api/weather/export.csv`)}
             style={{
               background: buttonColor,
               color: "white",
@@ -101,7 +102,7 @@ export function Dashboard() {
 
           <Button
             className="px-6 py-3 text-lg flex items-center gap-2"
-            onClick={() => window.open("http://localhost:3000/api/weather/export.xlsx")}
+            onClick={() => window.open(`${API_URL}/api/weather/export.xlsx`)}
             style={{
               background: buttonColor,
               color: "white",

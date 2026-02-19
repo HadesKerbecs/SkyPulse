@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import { DashboardLayout } from "../layouts/DashboardLayout";
@@ -37,7 +38,7 @@ export default function PokemonDetail() {
     async function load() {
       setLoading(true);
       try {
-        const res = await fetch(`http://localhost:3000/api/pokemon/${id}`);
+        const res = await fetch(`${API_URL}/api/pokemon/${id}`);
         const data = await res.json();
         setPokemon(data);
       } finally {

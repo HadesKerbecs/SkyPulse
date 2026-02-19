@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -30,7 +31,8 @@ export function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:3000/auth/login", {
+      
+      const res = await await axios.post(`${API_URL}/auth/login`, {
         email,
         password,
       });

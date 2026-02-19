@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DashboardLayout } from "@/layouts/DashboardLayout";
@@ -105,7 +106,8 @@ export default function Users() {
 
   async function fetchUsers() {
     try {
-      const res = await axios.get("http://localhost:3000/users", {
+       
+      const res = await axios.get( `${API_URL}/users`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(res.data);
@@ -123,7 +125,8 @@ export default function Users() {
     if (!confirm("Deseja realmente remover este usuário?")) return;
 
     try {
-      await axios.delete(`http://localhost:3000/users/${id}`, {
+       
+      await axios.delete(`${API_URL}/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -144,7 +147,7 @@ export default function Users() {
   async function saveUser(updated: any) {
     try {
       await axios.patch(
-        `http://localhost:3000/users/${updated.id}`,
+        `${API_URL}/users/${updated.id}`,
         {
           name: updated.name,
           email: updated.email,

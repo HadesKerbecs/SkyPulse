@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { DashboardLayout } from "../layouts/DashboardLayout";
@@ -39,7 +40,7 @@ export default function Pokemon() {
       setLoading(true);
       try {
         const res = await fetch(
-          `http://localhost:3000/api/pokemon?page=${page}`
+           `${API_URL}/api/pokemon?page=${page}`
         );
         if (!res.ok) {
           throw new Error("Erro ao carregar lista de Pokémon");
@@ -77,7 +78,7 @@ export default function Pokemon() {
     const timeout = setTimeout(async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/api/pokemon/search?q=${encodeURIComponent(q)}`
+          `${API_URL}/api/pokemon/search?q=${encodeURIComponent(q)}`
         );
 
         if (!res.ok) {
