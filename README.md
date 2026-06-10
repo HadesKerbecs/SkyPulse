@@ -1,152 +1,212 @@
-# Branch de entrega: eduardo-tristao
-# SkyPulse – Plataforma Full‑Stack com Autenticação JWT, CRUD de Usuários e Integrações
+# 🌦️ SkyPulse
 
-Este projeto consiste em uma aplicação full‑stack com autenticação JWT, CRUD de usuários, consultas a APIs externas (PokéAPI, Open-Meteo, SWAPI) e gerenciamento de sessão com expiração automática.
+Plataforma Full Stack desenvolvida para demonstrar autenticação segura, integração com APIs externas, processamento assíncrono e comunicação entre múltiplos serviços.
 
----
-
-## 🚀 Como Executar com Docker (Recomendado)
-
-### 1. Suba tudo com:
-```
-docker-compose up --build
-```
-
-### 2. Serviços disponíveis:
-| Serviço | URL |
-|--------|-----|
-| **Backend API (NestJS)** | http://localhost:3000 |
-| **Frontend (React/Vite)** | http://localhost:5173 |
-| **Swagger** | http://localhost:3000/api |
-| **Pokémon Worker** | executa automaticamente |
-| **Weather Worker** | executa automaticamente |
+O projeto reúne frontend em React, backend em NestJS, autenticação JWT, workers independentes e consumo de APIs públicas, simulando uma arquitetura moderna utilizada em aplicações corporativas.
 
 ---
 
-## ▶️ Executar Manualmente (Sem Docker)
+## 🚀 Principais Funcionalidades
 
-### **Backend**
-Requer: Node 18+
+### 🔐 Autenticação e Segurança
 
-```
-cd backend-api
-npm install
-npm run dev
-```
+* Cadastro de usuários
+* Login com JWT
+* Proteção de rotas
+* Sessão autenticada
+* Logout automático em caso de expiração do token
 
-```
-cd weather-producer
-docker-compose up --build
-```
+### 👥 Gestão de Usuários
 
-### **Frontend**
-```
-cd frontend
-npm install
-npm run dev
-```
+* CRUD completo
+* Consulta por ID
+* Atualização de dados
+* Exclusão de registros
+* Controle de acesso autenticado
 
-Backend iniciará em `http://localhost:3000`  
-Frontend iniciará em `http://localhost:5173`
+### 🌤️ Integração com APIs Externas
+
+Integração com múltiplos serviços externos:
+
+* Open-Meteo (dados climáticos)
+* PokéAPI (informações de Pokémon)
+* SWAPI (Star Wars API)
+
+Demonstrando consumo, tratamento e exibição de dados provenientes de diferentes fontes.
+
+### ⚙️ Processamento Assíncrono
+
+O sistema utiliza workers independentes para execução de tarefas paralelas:
+
+* Worker Python para processamento de dados
+* Worker Go para tarefas concorrentes
+* Comunicação desacoplada entre serviços
+
+### 📊 Dashboard
+
+* Visualização centralizada de informações
+* Consumo de APIs em tempo real
+* Feedback visual para operações do usuário
 
 ---
 
-## 🔐 Usuário Padrão
+## 🧠 Desafios Técnicos Resolvidos
 
-| Campo | Valor |
-|-------|-------|
-| Email | admin@example.com |
-| Senha | admin123 |
+Durante o desenvolvimento foram implementadas soluções para:
 
-Esse usuário é criado automaticamente caso não exista.
+* Autenticação JWT com expiração automática
+* Integração simultânea com múltiplas APIs externas
+* Separação de responsabilidades entre frontend e backend
+* Processamento assíncrono através de workers
+* Containerização completa do ambiente
+* Organização modular utilizando NestJS
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+### Frontend
+
+* React
+* TypeScript
+* Vite
+* React Router
+* Sistema de temas
+* Toast Notifications
+
+### Backend
+
+* NestJS
+* TypeScript
+* JWT Authentication
+* Swagger
+
+### Workers
+
+* Python
+* Go
+
+### DevOps
+
+* Docker
+* Docker Compose
+* Git
+* GitHub
+
+---
+
+## 🏗️ Arquitetura
+
+```text
+Frontend (React)
+        │
+        ▼
+Backend API (NestJS)
+        │
+ ┌──────┴──────┐
+ ▼             ▼
+Worker Python  Worker Go
+```
+
+A arquitetura foi projetada para demonstrar desacoplamento de responsabilidades, integração entre serviços e processamento paralelo.
+
+---
+
+## 📷 Demonstração
+
+### Tela de Login
+
+*(Inserir screenshot)*
+
+### Dashboard
+
+*(Inserir screenshot)*
+
+### Gestão de Usuários
+
+*(Inserir screenshot)*
+
+### Consulta Climática
+
+*(Inserir screenshot)*
+
+---
+
+## 🔗 APIs Integradas
+
+| API        | Finalidade                  |
+| ---------- | --------------------------- |
+| PokéAPI    | Consulta de Pokémon         |
+| Open-Meteo | Informações climáticas      |
+| SWAPI      | Dados do universo Star Wars |
 
 ---
 
 ## 📚 Endpoints Principais
 
-### **Auth**
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| POST | /auth/login | Login e geração de token |
-| POST | /auth/register | Registro |
+### Autenticação
 
-### **Users**
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| GET | /users | Lista todos os usuários |
-| GET | /users/:id | Busca usuário por ID |
-| PATCH | /users/:id | Atualiza usuário |
-| DELETE | /users/:id | Remove usuário |
+| Método | Endpoint       |
+| ------ | -------------- |
+| POST   | /auth/register |
+| POST   | /auth/login    |
 
-> Todos requerem **Bearer Token** no header.
+### Usuários
 
----
+| Método | Endpoint   |
+| ------ | ---------- |
+| GET    | /users     |
+| GET    | /users/:id |
+| PATCH  | /users/:id |
+| DELETE | /users/:id |
 
-## 🎨 Frontend – Páginas
-
-| Página | URL | Função |
-|--------|------|--------|
-| Login | /login | Autenticação |
-| Registro | /register | Criar conta |
-| Dashboard | /dashboard | Dados gerais |
-| Pokémon | /pokemon | Listagem e filtro |
-| Detalhes | /pokemon/:id | Detalhes do Pokémon |
-| Usuários | /users | CRUD completo |
+Todas as rotas protegidas exigem Bearer Token.
 
 ---
 
-## ⚙️ Estrutura do Projeto
+## 🐳 Execução com Docker
 
-```
-/
-├── backend-api (NestJS)
-|   ├── src/
-│   ├   ├── auth/
-│   ├   ├── users/
-│   ├   ├── pokemon/
-│   ├   ├── weather/
-│   ├   └── main.ts
-│
-├── frontend (React + Vite)
-│   ├── src/
-│   ├   ├── pages/
-│   ├   ├── components/
-│   ├   ├── layouts/
-│   ├   └── App.tsx
-│
-├── go-worker/
-│   ├── main.go
-│
-├── weather-producer
-└── ├── docker-compose.yml
+### Subir ambiente completo
+
+```bash
+docker-compose up --build
 ```
 
-```
-+-----------------------------+
-|        Frontend (React)     |
-|  Vite, Theme System, Toast  |
-+-------------+---------------+
-              |
-              v
-+-----------------------------+
-|        API (NestJS)         |
-| Auth, Users, Pokémon, Meteo |
-+-------------+---------------+
-              |
-     +--------+---------+
-     |                  |
-     v                  v
-+-----------+    +--------------+
-| WorkerPy  |    | WorkerGo     |
-| Tasks/API |    | Paralelas    |
-+-----------+    +--------------+
-```
+### Serviços Disponíveis
+
+| Serviço     | URL                       |
+| ----------- | ------------------------- |
+| Frontend    | http://localhost:5173     |
+| Backend API | http://localhost:3000     |
+| Swagger     | http://localhost:3000/api |
 
 ---
 
-## 📝 Observações
-- O sistema automaticamente **desloga** caso o token expire.
-- Toasts personalizados exibem erros, sucessos e avisos.
-- A arquitetura foi organizada priorizando **clareza, coesão e integração**.
+## 🎯 Objetivos do Projeto
+
+Este projeto foi desenvolvido para:
+
+* Aplicar conceitos modernos de desenvolvimento Full Stack
+* Praticar arquitetura baseada em serviços
+* Implementar autenticação segura utilizando JWT
+* Trabalhar com integração de APIs externas
+* Explorar processamento assíncrono com workers
+* Construir uma aplicação de portfólio próxima de cenários corporativos
 
 ---
+
+## 📌 Status
+
+✅ Autenticação JWT
+
+✅ CRUD completo de usuários
+
+✅ Integração com APIs externas
+
+✅ Workers independentes
+
+✅ Dockerização completa
+
+✅ Documentação Swagger
+
+✅ Frontend React integrado ao backend NestJS
